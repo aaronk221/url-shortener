@@ -49,7 +49,7 @@ app.get('/new/:url', function(req, res){
         db.close();
 
     });
-*/
+
 });
 
 app.listen(port);

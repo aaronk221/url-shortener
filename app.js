@@ -18,7 +18,7 @@ app.get('/', function(req, res){
 
 });
 
-app.post('/new/:url', function(req, res){
+app.get('/new/:url', function(req, res){
 
     var url = req.params.url;
 

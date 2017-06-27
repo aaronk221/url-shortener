@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/aaronk221/url-shortener/issues"
   },
-  "homepage": "https://github.com/aaronk221/url-shortener#readme"
+  "homepage": "https://github.com/aaronk221/url-shortener#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.29"
+  }
 }

@@ -51,6 +51,8 @@ app.get('/new/:url', function(req, res){
 
     });
 
+    res.render('index');
+
 });
 
 app.listen(port);

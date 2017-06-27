@@ -23,6 +23,8 @@ app.get('/new/:url', function(req, res){
     var url = req.params.url;
 
     console.log(url);
+
+    res.render('index');
 /*
     mongodb.connect(url, function(err, db){
 

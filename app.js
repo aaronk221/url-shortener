@@ -20,8 +20,9 @@ app.get('/', function(req, res){
 
 app.post('/new/:url', function(req, res){
 
+    var url = req.params.url;
 
-    console.log(req.query);
+    console.log(url);
 /*
     mongodb.connect(url, function(err, db){
 

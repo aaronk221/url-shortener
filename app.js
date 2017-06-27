@@ -3,14 +3,13 @@ var express = require('express');
 var http = require('http');
 
 var port = process.env.PORT || 8080;
+var dbUrl = 'mongodb://aaronk221:Ernieball1!@ds139362.mlab.com:39362/short-urls';
+
 
 var app = express();
 
 app.set('views', './views');
 app.set('view engine', 'jade');
-
-var url = 'mongodb://aaronk221:Ernieball1!@ds139362.mlab.com:39362/short-urls';
-
 
 app.get('/', function(req, res){
 
@@ -22,35 +21,23 @@ app.get('/new/:url', function(req, res){
 
     var url = req.params.url;
 
-    console.log(url);
-
-    res.render('index');
-/*
-    mongodb.connect(url, function(err, db){
+    mongodb.connect(dbUrl, function(err, db){
 
         if(err) console.log('Unable to connect to the server.');
-        else console.log('Connection established to ' + url);
+        else console.log('Connection established');
 
         var col = db.collection('urls');
 
         var shortUrl = {
 
-            url: 'google.com',
-            short: 'a4s'
+            'url': url,
+            short: 'short'
 
         };
 
         try{
 
-            col.update({ url: 'google.com' }, { $set: { _id: 'helloworld' } }, function(err, data){
-
-                if(err){
-
-                    console.log('could not update.\n' + err);
-
-                }
-
-            });
+            col.insert(shortUrl);
 
         }catch(e){
 

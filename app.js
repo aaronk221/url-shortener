@@ -55,4 +55,45 @@ app.get('/new/:url', function(req, res){
 
 });
 
+app.get('/:url', function(req, res){
+
+    var short = req.params.url;
+
+    mongodb.connect(dbUrl, function(err, db){
+
+        if(err) console.log('Unable to connect to the server.');
+        else console.log('Connection established');
+
+        var col = db.collection('urls');
+
+        try{
+
+            col.find({
+
+                'short': short
+
+            }).toArray(function(err, doc){
+
+                if(err) console.log("something went wrong\n" + err);
+                else {
+                    res.send(doc.url);
+                }
+
+            });
+
+            console.log('successfully redirected');
+
+        }catch(e){
+
+            console.log('error attempting push\n');
+            console.log(e);
+
+        }
+
+        db.close();
+
+    });
+
+});
+
 app.listen(port);

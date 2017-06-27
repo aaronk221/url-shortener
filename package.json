@@ -4,7 +4,7 @@
   "description": "URL shortening API",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "start": "node app.js"
   },
   "author": "aaronk221",
   "license": "ISC",
@@ -20,5 +20,6 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mongodb": "^2.2.29"
-  }
+  },
+  "devDependencies": {}
 }

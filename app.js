@@ -22,7 +22,7 @@ app.post('/new/:url', function(req, res){
 
 
     console.log(req.query);
-
+/*
     mongodb.connect(url, function(err, db){
 
         if(err) console.log('Unable to connect to the server.');
@@ -59,7 +59,7 @@ app.post('/new/:url', function(req, res){
         db.close();
 
     });
-
+*/
 });
 
 app.listen(port);

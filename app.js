@@ -38,6 +38,7 @@ app.get('/new/:url', function(req, res){
         try{
 
             col.insert(shortUrl);
+            console.log('short created');
 
         }catch(e){
 

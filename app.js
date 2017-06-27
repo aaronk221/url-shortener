@@ -76,7 +76,7 @@ app.get('/:url', function(req, res){
 
                 if(err) console.log("something went wrong\n" + err);
                 else {
-                    res.send(doc.url);
+                    res.redirect(doc.url);
                 }
 
             });

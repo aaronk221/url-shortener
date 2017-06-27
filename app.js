@@ -7,6 +7,7 @@ var port = process.env.PORT || 8080;
 var app = express();
 
 app.set('views', './views');
+app.set('view engine', 'jade');
 
 var url = 'mongodb://aaronk221:Ernieball1!@ds139362.mlab.com:39362/short-urls';
 

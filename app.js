@@ -2,6 +2,8 @@ var mongodb = require('mongodb').MongoClient;
 var express = require('express');
 var http = require('http');
 
+var port = process.env.PORT || 8080;
+
 var app = express();
 
 app.set('views', './views');
@@ -58,3 +60,5 @@ app.post('/new/:url', function(req, res){
     });
 
 });
+
+app.listen()

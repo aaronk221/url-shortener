@@ -1,19 +1,26 @@
 var mongodb = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
 var express = require('express');
 var http = require('http');
+var bp = require('body-parser');
+var config = require('./config');
+var base58 = require('./shortener');
+var urlModel = require('./models/urlModel');
 
 var port = process.env.PORT || 8080;
 var dbUrl = 'mongodb://aaronk221:Ernieball1!@ds139362.mlab.com:39362/short-urls';
 
-
 var app = express();
+
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
 
 app.set('views', './views');
 app.set('view engine', 'jade');
 
 app.get('/', function(req, res){
 
-    res.render('index');
+    res.sendFile('./html/index.html');
 
 });
 

@@ -73,9 +73,10 @@ app.get('/:shortUrl', function(req, res){
             res.redirect(doc.original);
 
         }
-        else
+        else{
+            console.log("Ya done messed up A-A-ron...");
             res.redirect(config.webhost);
-
+        }
     });
 
 });

@@ -64,13 +64,15 @@ app.post('/new/url', function(req, res){
 app.get('/:shortUrl', function(req, res){
 
     var shortUrl = req.params.shortUrl;
+    console.log(shortUrl);
     var id = shortener.decode(shortUrl);
+    console.log(id);
 
     urlModel.findOne({_id: id}, function(err, doc){
 
         if(doc){
 
-            res.redirect(doc.original);
+            res.redirect(doc.long_url);
 
         }
         else{

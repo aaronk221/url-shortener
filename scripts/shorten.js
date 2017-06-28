@@ -1,6 +1,8 @@
 //Send a POST request to our server with the provided URL
 $('.btn-shorten').on('click', function(){
 
+  console.log("Made it to the client js");
+
     $.ajax({
 
         url: '/new/url',

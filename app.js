@@ -14,10 +14,11 @@ var app = express();
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
+app.use('/', express.static(__dirname + '/html'));
 
 app.get('/', function(req, res){
 
-    res.sendFile('./html/index.html');
+    res.render('index.html');
 
 });
 

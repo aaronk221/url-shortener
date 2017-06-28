@@ -32,7 +32,7 @@ app.post('/new/url', function(req, res){
     var url = req.body.url;
     var shortUrl = '';
 
-    urlModel.findOne({'original': url}, function(doc){
+    urlModel.findOne({'long_url': url}, function(doc){
 
         if(doc){
 
@@ -42,7 +42,7 @@ app.post('/new/url', function(req, res){
         }
         else{
 
-            var entry = urlModel({'original': url});
+            var entry = urlModel({'long_url': url});
 
             entry.save(function(err){
 

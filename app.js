@@ -15,9 +15,6 @@ var app = express();
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
-app.set('views', './views');
-app.set('view engine', 'jade');
-
 app.get('/', function(req, res){
 
     res.sendFile('./html/index.html');

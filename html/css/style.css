@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville');
+
 .btn:focus, .btn-shorten:focus{
   outline: 0 !important;
 }
@@ -5,27 +7,26 @@
 html,
 body {
   height: 100%;
-  background-color: #4791D2;
+  background-color: #f44242;
 }
 
 body {
   color: #fff;
   text-align: center;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Libre Baskerville', serif;
 }
 
 .btn-shorten {
   color: #ffffff;
-  background-color: #F89406;
+  background-color: #41f447;
   border: none;
 }
 
 .btn-shorten:hover,
 .btn-shorten:focus,
-.btn-shorten:active,
-.btn-shorten.active {
+.btn-shorten:active {
   color: #ffffff;
-  background-color: #FA8900;
+  background-color: #2db531;
   border: none;
 }
 

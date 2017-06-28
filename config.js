@@ -2,7 +2,7 @@ var config = {};
 
 config.db = {};
 
-config.webhost = 'mongodb://aaronk221:Ernieball1!@ds139362.mlab.com:39362/short-urls'
+config.webhost = 'https://aaronk221-url-shortener.herokuapp.com';
 config.db.host = 'ds139362.mlab.com';
 config.db.name = 'short-urls';
 

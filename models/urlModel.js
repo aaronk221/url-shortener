@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+//schema for global counter collection
 var counterSchema = new Schema({
 
     _id: {type: String, required: true},
@@ -10,6 +11,7 @@ var counterSchema = new Schema({
 
 var counter = mongoose.model('counter', counterSchema);
 
+//schema for URL collection
 var urlSchema = new Schema({
 
     _id: {type: Number, index: true},
@@ -18,9 +20,11 @@ var urlSchema = new Schema({
 
 });
 
+//Increment the global counter before updating the URL collection
 urlSchema.pre('save', function(next){
 
     var doc = this;
+    console.log("******DEBUG: " + this);
 
     counter.findByIdAndUpdate({ _id: 'url_count'}, { $inc: {seq: 1} }, function(err, counter){
 

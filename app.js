@@ -1,101 +1,80 @@
-var mongodb = require('mongodb').MongoClient;
+//var mongodb = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var express = require('express');
-var http = require('http');
 var bp = require('body-parser');
 var config = require('./config');
-var base58 = require('./shortener');
+var shortener = require('./shortener');
 var urlModel = require('./models/urlModel');
-
-var port = process.env.PORT || 8080;
-var dbUrl = 'mongodb://aaronk221:Ernieball1!@ds139362.mlab.com:39362/short-urls';
-
 var app = express();
 
+//heroku port
+var port = process.env.PORT || 8080;
+
+mongoose.connect(process.env.MONGO_URI);
+
+//parse incoming request body as json
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
+
+//set directory for serving html
 app.use('/', express.static(__dirname + '/html'));
 
+//render homepage
 app.get('/', function(req, res){
 
     res.render('index.html');
 
 });
 
-app.get('/new/:url', function(req, res){
+//handle POST requests for adding new URLs to our database
+app.post('/new/url', function(req, res){
 
-    var url = req.params.url;
+    var url = req.body.url;
+    var shortUrl = '';
 
-    mongodb.connect(dbUrl, function(err, db){
+    urlModel.findOne({'original': url}, function(doc){
 
-        if(err) console.log('Unable to connect to the server.');
-        else console.log('Connection established');
+        if(doc){
 
-        var col = db.collection('urls');
-
-        var shortUrl = {
-
-            'url': url,
-            short: 'short'
-
-        };
-
-        try{
-
-            col.insert(shortUrl);
-            console.log('short created');
-
-        }catch(e){
-
-            console.log('error attempting push\n');
-            console.log(e);
+            shortUrl = config.webhost + shortener.encode(doc._id);
+            res.send({'shortUrl': shortUrl});
 
         }
+        else{
 
-        db.close();
+            var entry = urlModel({'original': url});
 
-    });
+            entry.save(function(err){
 
-    res.render('index');
+                if(err) console.log(err);
 
-});
-
-app.get('/:url', function(req, res){
-
-    var short = req.params.url;
-
-    mongodb.connect(dbUrl, function(err, db){
-
-        if(err) console.log('Unable to connect to the server.');
-        else console.log('Connection established');
-
-        var col = db.collection('urls');
-
-        try{
-
-            col.find({
-
-                'short': short
-
-            }).toArray(function(err, doc){
-
-                if(err) console.log("something went wrong\n" + err);
-                else {
-                    res.redirect(doc.url);
-                }
+                shortUrl = config.webhost + shortener.encode(entry._id);
+                res.send({'shortUrl': shortUrl});
 
             });
 
-            console.log('successfully redirected');
-
-        }catch(e){
-
-            console.log('error attempting push\n');
-            console.log(e);
-
         }
 
-        db.close();
+    });
+
+});
+
+//redirect user to the desired website if the provided shortened URL
+//if it exists in our database, otherwise direct to homepage
+app.get('/:shortUrl', function(req, res){
+
+    var shortUrl = req.params.shortUrl;
+    var id = shortener.decode(shortUrl);
+
+    urlModel.findOne({_id: id}, function(err, doc){
+
+        if(doc){
+
+            res.redirect(doc.original);
+
+        }
+        else
+            res.redirect(config.webhost);
 
     });
 

@@ -1,3 +1,4 @@
+//bijective math functions for creating our shortened urls
 var alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 var base = alphabet.length;
 
